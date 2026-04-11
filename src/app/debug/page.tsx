@@ -457,12 +457,24 @@ const FRAMES: Frame[] = [
 
 export default function DebugPage() {
   const [index, setIndex] = useState(0);
+  const [scale, setScale] = useState(1);
 
   const frame = FRAMES[index];
   const total = FRAMES.length;
 
   const goNext = () => setIndex((i) => Math.min(i + 1, total - 1));
   const goPrev = () => setIndex((i) => Math.max(i - 1, 0));
+
+  useEffect(() => {
+    const computeScale = () => {
+      // 96px = nav height + padding; phone native height = 780px
+      const available = window.innerHeight - 96;
+      setScale(Math.min(1, available / 780));
+    };
+    computeScale();
+    window.addEventListener("resize", computeScale);
+    return () => window.removeEventListener("resize", computeScale);
+  }, []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -514,17 +526,22 @@ export default function DebugPage() {
 
       {/* ── Desktop layout ── */}
       <div className="hidden sm:flex flex-col items-center justify-center gap-4 px-4" style={{ height: "100dvh" }}>
-        {/* Phone frame — sized to fill viewport, capped at real phone dimensions */}
-        <div
-          className="relative bg-white overflow-hidden border border-gray-700 shadow-2xl"
-          style={{
-            height: "min(calc(100dvh - 96px), 780px)",
-            width: "min(calc((100dvh - 96px) / 2), 390px)",
-            borderRadius: "2.5rem",
-          }}
-        >
-          <div className="absolute inset-0 overflow-y-auto">
-            {frame.render()}
+        {/* Outer wrapper sized to the scaled visual dimensions */}
+        <div style={{ width: 390 * scale, height: 780 * scale, flexShrink: 0, overflow: "hidden" }}>
+          {/* Phone frame always at native 390×780, scaled down visually */}
+          <div
+            className="relative bg-white overflow-hidden border border-gray-700 shadow-2xl"
+            style={{
+              width: 390,
+              height: 780,
+              borderRadius: "2.5rem",
+              transform: `scale(${scale})`,
+              transformOrigin: "top left",
+            }}
+          >
+            <div className="absolute inset-0 overflow-y-auto">
+              {frame.render()}
+            </div>
           </div>
         </div>
         {/* Navigation */}
