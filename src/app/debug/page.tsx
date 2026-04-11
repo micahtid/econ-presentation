@@ -107,7 +107,7 @@ function MockHostLobby() {
           <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#aaaaaa", margin: 0 }}>
             Scan to Join
           </p>
-          <div style={{ background: "#ffffff", borderRadius: "16px", padding: "14px", boxShadow: "rgba(0,0,0,0.06) 0px 2px 12px 0px" }}>
+          <div style={{ background: "#ffffff", borderRadius: "16px", padding: "14px" }}>
             <div style={{ width: "140px", height: "140px", background: "#f0f0f0", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <span style={{ fontSize: "11px", color: "#bbbbbb", textAlign: "center", lineHeight: 1.5 }}>QR at runtime</span>
             </div>
@@ -208,24 +208,24 @@ type Frame = {
 const FRAMES: Frame[] = [
   // ── Landing ──────────────────────────────────────────────────────
   {
-    title: "Landing Page",
+    title: "Landing",
     tag: "Home",
     render: () => <MockLandingPage />,
   },
   // ── Host flow ─────────────────────────────────────────────────────
   {
-    title: "Host: Lobby",
+    title: "Host Lobby",
     tag: "Host",
     render: () => <MockHostLobby />,
   },
   // ── Player join ───────────────────────────────────────────────────
   {
-    title: "Join: Enter Code + Name",
+    title: "Join",
     tag: "Join",
     render: () => <MockJoinPage />,
   },
   {
-    title: "Waiting: Host hasn't started yet",
+    title: "Waiting",
     tag: "Wait",
     render: () => (
       <WaitingScreen message="Waiting for the host to begin" subMessage="Joined as TestPlayer" />
@@ -233,14 +233,14 @@ const FRAMES: Frame[] = [
   },
   // ── Host monitors game ────────────────────────────────────────────
   {
-    title: "Host: Game Monitor",
+    title: "Host Monitor",
     tag: "Host",
     render: () => <MockHostMonitor />,
   },
   // ── Events & month-end summaries ──────────────────────────────────
   // Event 1 — three child statuses
   {
-    title: "Event 1 · Waterborne Illness (school)",
+    title: "Event 1",
     tag: "Ev 1",
     render: () => (
       <EventScreen playerId="mock" eventNumber={1} childStatus="school"
@@ -249,7 +249,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 1 · Waterborne Illness (working)",
+    title: "Event 1",
     tag: "Ev 1",
     render: () => (
       <EventScreen playerId="mock" eventNumber={1} childStatus="working"
@@ -258,7 +258,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Month End 1 · Paid for medicine",
+    title: "Month End 1",
     tag: "ME 1",
     render: () => (
       <MonthEndScreen playerId="mock" eventNumber={1}
@@ -268,7 +268,7 @@ const FRAMES: Frame[] = [
   },
   // Event 2 — three child statuses
   {
-    title: "Event 2 · Food Prices Double (school)",
+    title: "Event 2",
     tag: "Ev 2",
     render: () => (
       <EventScreen playerId="mock" eventNumber={2} childStatus="school"
@@ -277,7 +277,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 2 · Food Prices Double (working)",
+    title: "Event 2",
     tag: "Ev 2",
     render: () => (
       <EventScreen playerId="mock" eventNumber={2} childStatus="working"
@@ -286,7 +286,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Month End 2 · Took high-interest loan",
+    title: "Month End 2",
     tag: "ME 2",
     render: () => (
       <MonthEndScreen playerId="mock" eventNumber={2}
@@ -296,7 +296,7 @@ const FRAMES: Frame[] = [
   },
   // Event 3 — three child statuses
   {
-    title: "Event 3 · Lost Work (school)",
+    title: "Event 3",
     tag: "Ev 3",
     render: () => (
       <EventScreen playerId="mock" eventNumber={3} childStatus="school"
@@ -305,7 +305,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 3 · Lost Work (working)",
+    title: "Event 3",
     tag: "Ev 3",
     render: () => (
       <EventScreen playerId="mock" eventNumber={3} childStatus="working"
@@ -314,7 +314,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 3 · Lost Work (trained)",
+    title: "Event 3",
     tag: "Ev 3",
     render: () => (
       <EventScreen playerId="mock" eventNumber={3} childStatus="trained"
@@ -323,7 +323,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Month End 3 · Borrowed from employer",
+    title: "Month End 3",
     tag: "ME 3",
     render: () => (
       <MonthEndScreen playerId="mock" eventNumber={3}
@@ -333,7 +333,7 @@ const FRAMES: Frame[] = [
   },
   // Event 4 — three child statuses
   {
-    title: "Event 4 · Vocational Training (school)",
+    title: "Event 4",
     tag: "Ev 4",
     render: () => (
       <EventScreen playerId="mock" eventNumber={4} childStatus="school"
@@ -342,7 +342,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 4 · Vocational Training (working)",
+    title: "Event 4",
     tag: "Ev 4",
     render: () => (
       <EventScreen playerId="mock" eventNumber={4} childStatus="working"
@@ -351,7 +351,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 4 · Vocational Training (trained)",
+    title: "Event 4",
     tag: "Ev 4",
     render: () => (
       <EventScreen playerId="mock" eventNumber={4} childStatus="trained"
@@ -360,7 +360,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Month End 4 · Enrolled child in training",
+    title: "Month End 4",
     tag: "ME 4",
     render: () => (
       <MonthEndScreen playerId="mock" eventNumber={4}
@@ -370,7 +370,7 @@ const FRAMES: Frame[] = [
   },
   // Event 5 — three child statuses
   {
-    title: "Event 5 · Catastrophe (school)",
+    title: "Event 5",
     tag: "Ev 5",
     render: () => (
       <EventScreen playerId="mock" eventNumber={5} childStatus="school"
@@ -379,7 +379,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 5 · Catastrophe (working)",
+    title: "Event 5",
     tag: "Ev 5",
     render: () => (
       <EventScreen playerId="mock" eventNumber={5} childStatus="working"
@@ -388,7 +388,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 5 · Catastrophe (trained)",
+    title: "Event 5",
     tag: "Ev 5",
     render: () => (
       <EventScreen playerId="mock" eventNumber={5} childStatus="trained"
@@ -397,7 +397,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Month End 5 · Took massive debt",
+    title: "Month End 5",
     tag: "ME 5",
     render: () => (
       <MonthEndScreen playerId="mock" eventNumber={5}
@@ -407,7 +407,7 @@ const FRAMES: Frame[] = [
   },
   // Event 6 — three child statuses
   {
-    title: "Event 6 · The Long Term (school)",
+    title: "Event 6",
     tag: "Ev 6",
     render: () => (
       <EventScreen playerId="mock" eventNumber={6} childStatus="school"
@@ -416,7 +416,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 6 · The Long Term (working)",
+    title: "Event 6",
     tag: "Ev 6",
     render: () => (
       <EventScreen playerId="mock" eventNumber={6} childStatus="working"
@@ -425,7 +425,7 @@ const FRAMES: Frame[] = [
     ),
   },
   {
-    title: "Event 6 · The Long Term (trained)",
+    title: "Event 6",
     tag: "Ev 6",
     render: () => (
       <EventScreen playerId="mock" eventNumber={6} childStatus="trained"
@@ -435,19 +435,19 @@ const FRAMES: Frame[] = [
   },
   // ── End of game ───────────────────────────────────────────────────
   {
-    title: "Waiting: Game finished, waiting for reveal",
+    title: "Waiting",
     tag: "Wait",
     render: () => (
       <WaitingScreen message="You're done!" subMessage="Waiting for everyone else to finish…" />
     ),
   },
   {
-    title: "Results: Player View",
+    title: "Results",
     tag: "Results",
     render: () => <ResultsScreen results={MOCK_RESULTS} />,
   },
   {
-    title: "Host: Results Dashboard",
+    title: "Host Results",
     tag: "Host",
     render: () => <ResultsScreen results={MOCK_RESULTS} isHost />,
   },
@@ -474,31 +474,77 @@ export default function DebugPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-950 flex flex-col">
-      {/* Nav bar */}
-      <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 bg-gray-900 border-b border-gray-800">
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 bg-gray-700 text-gray-300">
-            {frame.tag}
-          </span>
-          <span className="text-sm text-white font-medium truncate">{frame.title}</span>
+    <div className="min-h-screen bg-gray-950">
+
+      {/* ── Mobile layout ── */}
+      <div className="sm:hidden flex flex-col" style={{ minHeight: "100dvh" }}>
+        {/* Progress bar */}
+        <div className="h-0.5 bg-white/10 flex-shrink-0">
+          <div
+            className="h-full bg-white/60 transition-all duration-200"
+            style={{ width: `${((index + 1) / total) * 100}%` }}
+          />
         </div>
-        <div className="flex items-center gap-2 flex-shrink-0 ml-4">
+        {/* Content */}
+        <div className="flex-1 bg-white overflow-y-auto">
+          {frame.render()}
+        </div>
+        {/* Bottom nav */}
+        <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 bg-gray-900">
           <button
             onClick={goPrev}
             disabled={index === 0}
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 disabled:opacity-25 transition-colors"
+          >
+            <LuChevronLeft size={18} />
+          </button>
+          <div className="text-center">
+            <p className="text-white text-xs font-medium leading-tight truncate max-w-[180px]">{frame.title}</p>
+            <p className="text-gray-500 text-xs mt-0.5">{index + 1} / {total}</p>
+          </div>
+          <button
+            onClick={goNext}
+            disabled={index === total - 1}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 disabled:opacity-25 transition-colors"
+          >
+            <LuChevronRight size={18} />
+          </button>
+        </div>
+      </div>
+
+      {/* ── Desktop layout ── */}
+      <div className="hidden sm:flex flex-col items-center justify-center gap-4 px-4" style={{ height: "100dvh" }}>
+        {/* Phone frame — sized to fill viewport, capped at real phone dimensions */}
+        <div
+          className="relative bg-white overflow-hidden border border-gray-700 shadow-2xl"
+          style={{
+            height: "min(calc(100dvh - 96px), 780px)",
+            width: "min(calc((100dvh - 96px) / 2), 390px)",
+            borderRadius: "2.5rem",
+          }}
+        >
+          <div className="absolute inset-0 overflow-y-auto">
+            {frame.render()}
+          </div>
+        </div>
+        {/* Navigation */}
+        <div className="flex items-center gap-5 flex-shrink-0">
+          <button
+            onClick={goPrev}
+            disabled={index === 0}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 hover:bg-gray-700 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
             title="Previous (←)"
           >
             <LuChevronLeft size={18} />
           </button>
-          <span className="text-xs text-gray-400 tabular-nums w-14 text-center">
-            {index + 1} / {total}
-          </span>
+          <div className="text-center min-w-[200px]">
+            <p className="text-white text-sm font-medium truncate">{frame.title}</p>
+            <p className="text-gray-500 text-xs mt-0.5">{index + 1} / {total}</p>
+          </div>
           <button
             onClick={goNext}
             disabled={index === total - 1}
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 text-gray-300 hover:bg-gray-700 disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
             title="Next (→)"
           >
             <LuChevronRight size={18} />
@@ -506,49 +552,6 @@ export default function DebugPage() {
         </div>
       </div>
 
-      {/* Frame strip */}
-      <div className="flex-shrink-0 overflow-x-auto bg-gray-900 border-b border-gray-800">
-        <div className="flex gap-1 px-3 py-2 min-w-max">
-          {FRAMES.map((f, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              title={f.title}
-              className={`flex-shrink-0 px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                i === index
-                  ? "bg-white text-gray-900"
-                  : "bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-200"
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Preview area */}
-      <div className="flex-1 flex items-start justify-center py-8 px-4">
-        <div className="flex-shrink-0 w-[390px]">
-          {/* Phone frame */}
-          <div
-            className="relative bg-white rounded-[2.5rem] overflow-hidden border border-gray-700 shadow-2xl"
-            style={{ height: "780px" }}
-          >
-            {/* Fake status bar */}
-            <div className="absolute top-0 left-0 right-0 h-6 bg-white z-10 flex items-center justify-between px-6 border-b border-gray-100">
-              <span className="text-[10px] text-gray-500 font-medium">9:41</span>
-              <span className="text-[10px] text-gray-500">●●●</span>
-            </div>
-            {/* Scrollable content */}
-            <div className="absolute inset-0 top-6 overflow-y-auto">
-              {frame.render()}
-            </div>
-          </div>
-          <p className="text-center text-gray-600 text-xs mt-3 flex items-center justify-center gap-1">
-            <LuChevronLeft size={12} /><LuChevronRight size={12} /> arrow keys · click frame numbers to jump
-          </p>
-        </div>
-      </div>
     </div>
   );
 }

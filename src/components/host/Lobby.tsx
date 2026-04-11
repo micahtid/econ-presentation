@@ -48,7 +48,7 @@ export default function Lobby({ roomId, code, players }: Props) {
             Scan to Join
           </p>
           {joinUrl && (
-            <div style={{ background: "#ffffff", borderRadius: "16px", padding: "16px", boxShadow: "rgba(0,0,0,0.06) 0px 2px 12px 0px" }}>
+            <div style={{ background: "#ffffff", borderRadius: "16px", padding: "16px" }}>
               <QRCodeSVG value={joinUrl} size={180} />
             </div>
           )}
