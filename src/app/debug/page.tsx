@@ -474,10 +474,10 @@ export default function DebugPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="bg-gray-950">
 
       {/* ── Mobile layout ── */}
-      <div className="sm:hidden flex flex-col" style={{ minHeight: "100dvh" }}>
+      <div className="sm:hidden flex flex-col" style={{ height: "100dvh" }}>
         {/* Progress bar */}
         <div className="h-0.5 bg-white/10 flex-shrink-0">
           <div
@@ -486,7 +486,7 @@ export default function DebugPage() {
           />
         </div>
         {/* Content */}
-        <div className="flex-1 bg-white overflow-y-auto">
+        <div className="flex-1 min-h-0 bg-white overflow-y-auto">
           {frame.render()}
         </div>
         {/* Bottom nav */}
