@@ -120,7 +120,7 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "C",
-        label: "Send child to work to cover costs",
+        label: "Send child to work for medicine",
         effect: "+$15 to monthly income; child leaves school",
         balanceDelta: 0,
         incomeDelta: 15,
@@ -198,7 +198,7 @@ export const EVENTS: GameEvent[] = [
     options: [
       {
         key: "A",
-        label: "Borrow from employer or landlord",
+        label: "Borrow from employer / landlord",
         effect: "+$10 to monthly expenses",
         balanceDelta: 0,
         incomeDelta: 0,
@@ -316,7 +316,7 @@ export const EVENTS: GameEvent[] = [
     options: [
       {
         key: "A",
-        label: "Sell tools, take on massive debt",
+        label: "Sell tools / take on debt",
         effect: "+$20 to monthly expenses",
         balanceDelta: 0,
         incomeDelta: 0,
