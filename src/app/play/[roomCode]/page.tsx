@@ -8,12 +8,15 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import EventScreen from "@/components/game/EventScreen";
 import MonthEndScreen from "@/components/game/MonthEndScreen";
 import WaitingScreen from "@/components/game/WaitingScreen";
+import LeaderboardScreen from "@/components/game/LeaderboardScreen";
 import ResultsScreen from "@/components/game/ResultsScreen";
+import GameIntroScreen from "@/components/game/GameIntroScreen";
 import type { ChildStatus } from "@/lib/gameConstants";
 
 export default function PlayPage() {
   const { roomCode } = useParams<{ roomCode: string }>();
   const [playerId, setPlayerId] = useState<string | null>(null);
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     const stored = localStorage.getItem("playerId");
@@ -89,9 +92,14 @@ export default function PlayPage() {
     );
   }
 
-  // Results revealed
-  if (room?.revealResults && results) {
+  // Results stats revealed (after leaderboard)
+  if (room?.revealStats && results) {
     return <ResultsScreen results={results} />;
+  }
+
+  // Leaderboard revealed (before stats)
+  if (room?.revealResults && results) {
+    return <LeaderboardScreen results={results} />;
   }
 
   // Waiting for host to start
@@ -131,6 +139,16 @@ export default function PlayPage() {
 
   // Active event
   if (player.phase === "event" && player.scenario) {
+    // Show intro sequence before Event 1
+    if (player.currentEvent === 1 && showIntro) {
+      return (
+        <GameIntroScreen
+          scenarioId={player.scenario}
+          onDone={() => setShowIntro(false)}
+        />
+      );
+    }
+
     return (
       <EventScreen
         playerId={player._id}

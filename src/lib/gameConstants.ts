@@ -95,12 +95,12 @@ export const EVENTS: GameEvent[] = [
     id: 1,
     title: "Waterborne Illness",
     description:
-      "A severe waterborne illness strikes your family. You need to act.",
+      "The shared well water has made your family sick. Without treatment, you risk missing work — and losing income you cannot afford to lose. Every day you delay costs you more than medicine would.",
     autoPenalty: null,
     options: [
       {
         key: "A",
-        label: "Pay for medicine",
+        label: "Buy medicine now",
         effect: "–$10 to balance",
         balanceDelta: -10,
         incomeDelta: 0,
@@ -110,8 +110,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "B",
-        label: "Ignore it",
-        effect: "–$5 to monthly income",
+        label: "Push through without treatment",
+        effect: "–$5/month from recurring illness",
         balanceDelta: 0,
         incomeDelta: -5,
         expenseDelta: 0,
@@ -120,8 +120,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "C",
-        label: "Send child to work for medicine",
-        effect: "+$15 to monthly income; child leaves school",
+        label: "Pull child out of school to earn medicine money",
+        effect: "+$15/month income; child leaves school permanently",
         balanceDelta: 0,
         incomeDelta: 15,
         expenseDelta: 0,
@@ -130,7 +130,7 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "D",
-        label: "Use child's wages for medicine",
+        label: "Use child's wages to cover the medicine",
         effect: "+$10 to balance",
         balanceDelta: 10,
         incomeDelta: 0,
@@ -142,14 +142,14 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: 2,
-    title: "Food Prices Double",
+    title: "Food Prices Spike",
     description:
-      "The cost of staple foods suddenly doubles this month. You must cover the extra cost.",
+      "The market price of rice and cooking oil has doubled overnight. Vendors offer no credit and no warnings. The extra cost is unavoidable — but your budget has no room to absorb it.",
     autoPenalty: null,
     options: [
       {
         key: "A",
-        label: "Pay the extra from your savings",
+        label: "Dip into savings to cover it",
         effect: "–$5 to balance",
         balanceDelta: -5,
         incomeDelta: 0,
@@ -160,7 +160,7 @@ export const EVENTS: GameEvent[] = [
       {
         key: "B",
         label: "Take a high-interest loan",
-        effect: "+$10 to balance; +$10 to monthly expenses",
+        effect: "+$10 to balance now; +$10/month in repayments forever after",
         balanceDelta: 10,
         incomeDelta: 0,
         expenseDelta: 10,
@@ -169,8 +169,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "C",
-        label: "Send child to work",
-        effect: "+$15 to monthly income; child leaves school",
+        label: "Send child to work to cover food costs",
+        effect: "+$15/month income; child leaves school permanently",
         balanceDelta: 0,
         incomeDelta: 15,
         expenseDelta: 0,
@@ -179,8 +179,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "D",
-        label: "Cut food costs with child's wages",
-        effect: "–$5 to monthly expenses",
+        label: "Let child's wages offset food costs",
+        effect: "–$5/month to expenses",
         balanceDelta: 0,
         incomeDelta: 0,
         expenseDelta: -5,
@@ -191,15 +191,15 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: 3,
-    title: "Lost Work",
+    title: "Lost Wages",
     description:
-      "The adult misses work due to lingering illness or lack of available jobs. You lose $20 immediately. You must find a way to cope.",
+      "A lingering illness forces you to miss two weeks of work. Your employer docks the pay immediately — $20 gone before you see it. You still owe rent at the end of the month.",
     autoPenalty: -20,
     options: [
       {
         key: "A",
-        label: "Borrow from employer / landlord",
-        effect: "+$10 to monthly expenses",
+        label: "Borrow from your employer or landlord",
+        effect: "+$10/month to repayments — they will collect every month",
         balanceDelta: 0,
         incomeDelta: 0,
         expenseDelta: 10,
@@ -208,8 +208,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "B",
-        label: "Have child work double shifts",
-        effect: "+$10 to balance",
+        label: "Have child work double shifts to make up the gap",
+        effect: "+$10 to balance — your child works harder",
         balanceDelta: 10,
         incomeDelta: 0,
         expenseDelta: 0,
@@ -219,7 +219,7 @@ export const EVENTS: GameEvent[] = [
       {
         key: "C",
         label: "Sell a household possession",
-        effect: "+$5 to balance",
+        effect: "+$5 to balance — a one-time fix",
         balanceDelta: 5,
         incomeDelta: 0,
         expenseDelta: 0,
@@ -228,8 +228,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "D",
-        label: "Send child to work",
-        effect: "+$10 to balance; child leaves school",
+        label: "Pull child out of school to cover the shortfall",
+        effect: "+$10 to balance; child leaves school permanently",
         balanceDelta: 10,
         incomeDelta: 0,
         expenseDelta: 0,
@@ -238,8 +238,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "E",
-        label: "Trained child covers the shortfall",
-        effect: "+$15 to balance; –$5 to monthly income",
+        label: "Trained child picks up extra work to cover it",
+        effect: "+$15 to balance; –$5/month as they reduce training hours",
         balanceDelta: 15,
         incomeDelta: -5,
         expenseDelta: 0,
@@ -250,15 +250,15 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: 4,
-    title: "Vocational Training Opens",
+    title: "A Rare Opportunity",
     description:
-      "A free vocational training program opens in your district. It guarantees a safe, higher-paying job for graduates.",
+      "An NGO has launched a free vocational training program in your district. Graduates are promised placement in a certified workshop — real wages, safe conditions. But training takes time away from work.",
     autoPenalty: null,
     options: [
       {
         key: "A",
         label: "Enroll child in the program",
-        effect: "$0; child begins training",
+        effect: "No immediate cost; child enters training toward a stable future",
         balanceDelta: 0,
         incomeDelta: 0,
         expenseDelta: 0,
@@ -268,7 +268,7 @@ export const EVENTS: GameEvent[] = [
       {
         key: "B",
         label: "Pass up the opportunity",
-        effect: "$0 change",
+        effect: "No change — things stay as they are",
         balanceDelta: 0,
         incomeDelta: 0,
         expenseDelta: 0,
@@ -277,8 +277,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "C",
-        label: "Enroll working child in training",
-        effect: "–$15 to monthly income; child trains",
+        label: "Pull working child out of labor for training",
+        effect: "–$15/month while child trains; they lose their wages",
         balanceDelta: 0,
         incomeDelta: -15,
         expenseDelta: 0,
@@ -287,8 +287,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "D",
-        label: "Find higher-paying work yourself",
-        effect: "+$5 to monthly income; +$3 to monthly expenses",
+        label: "Take on riskier, higher-paying work yourself",
+        effect: "+$5/month income; +$3/month in added costs",
         balanceDelta: 0,
         incomeDelta: 5,
         expenseDelta: 3,
@@ -297,8 +297,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "E",
-        label: "Trained child mentors for a stipend",
-        effect: "+$10 to balance; +$3 to monthly expenses",
+        label: "Have trained child mentor others for a stipend",
+        effect: "+$10 to balance; +$3/month in program fees",
         balanceDelta: 10,
         incomeDelta: 0,
         expenseDelta: 3,
@@ -311,13 +311,13 @@ export const EVENTS: GameEvent[] = [
     id: 5,
     title: "Catastrophe",
     description:
-      "A major workplace injury or localized flood destroys your livelihood. You must find $30 immediately to survive.",
+      "Disaster strikes without warning — a serious workplace injury or a flood destroys your tools and livelihood. You need $30 right now just to keep your family fed. There are no good options.",
     autoPenalty: null,
     options: [
       {
         key: "A",
-        label: "Sell tools / take on debt",
-        effect: "+$20 to monthly expenses",
+        label: "Sell tools and take on emergency debt",
+        effect: "+$20/month in debt payments — a crushing long-term burden",
         balanceDelta: 0,
         incomeDelta: 0,
         expenseDelta: 20,
@@ -326,8 +326,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "B",
-        label: "Send child into hazardous labor",
-        effect: "+$30 to balance; child leaves school",
+        label: "Send child into hazardous labor immediately",
+        effect: "+$30 to balance now; child enters dangerous work",
         balanceDelta: 30,
         incomeDelta: 0,
         expenseDelta: 0,
@@ -337,7 +337,7 @@ export const EVENTS: GameEvent[] = [
       {
         key: "C",
         label: "Take a predatory microloan",
-        effect: "+$15 to balance; +$5 to monthly expenses",
+        effect: "+$15 to balance; +$5/month in fees",
         balanceDelta: 15,
         incomeDelta: 0,
         expenseDelta: 5,
@@ -348,15 +348,15 @@ export const EVENTS: GameEvent[] = [
   },
   {
     id: 6,
-    title: "The Long Term",
+    title: "The Long Run",
     description:
-      "Years pass. The adult can no longer work due to age, untreated illness, or injury. How does the family survive?",
+      "Years have passed. Your body, worn down by labor and untreated ailments, can no longer keep up with the work. The future of your family now rests on choices made long ago.",
     autoPenalty: null,
     options: [
       {
         key: "A",
-        label: "Trained child gets a stable job",
-        effect: "+$50 to monthly income",
+        label: "Trained child secures a stable, well-paying job",
+        effect: "+$50/month — their training finally pays off",
         balanceDelta: 0,
         incomeDelta: 50,
         expenseDelta: 0,
@@ -365,8 +365,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "B",
-        label: "Child takes over dangerous work",
-        effect: "+$30 to monthly income; child enters dangerous work",
+        label: "Child takes over your dangerous work",
+        effect: "+$30/month — the cycle continues",
         balanceDelta: 0,
         incomeDelta: 30,
         expenseDelta: 0,
@@ -375,8 +375,8 @@ export const EVENTS: GameEvent[] = [
       },
       {
         key: "C",
-        label: "Relocate for better opportunities",
-        effect: "+$20 to monthly income; +$10 to monthly expenses",
+        label: "Uproot the family and relocate for opportunity",
+        effect: "+$20/month income; +$10/month in relocation costs",
         balanceDelta: 0,
         incomeDelta: 20,
         expenseDelta: 10,
@@ -386,7 +386,7 @@ export const EVENTS: GameEvent[] = [
       {
         key: "D",
         label: "Join a community cooperative",
-        effect: "+$10 to monthly income; +$5 to monthly expenses",
+        effect: "+$10/month income; +$5/month in membership costs",
         balanceDelta: 0,
         incomeDelta: 10,
         expenseDelta: 5,
@@ -396,6 +396,87 @@ export const EVENTS: GameEvent[] = [
     ],
   },
 ];
+
+/**
+ * Returns a short narrative note shown at the top of an event screen,
+ * contextualizing the player's current situation based on prior decisions.
+ */
+export function getContextNote(
+  eventNumber: number,
+  childStatus: ChildStatus,
+  balance: number,
+  monthlyExpenses: number,
+  scenarioId: number
+): string | null {
+  const scenario = SCENARIOS[scenarioId - 1];
+  if (!scenario || eventNumber <= 1) return null;
+
+  const extraExpenses = monthlyExpenses - scenario.expenses;
+
+  switch (eventNumber) {
+    case 2: {
+      if (childStatus === "working") {
+        return "Because of last month's crisis, your child dropped out of school to work. Their wages are helping — but they won't be going back to school.";
+      }
+      if (balance < 0) {
+        return `Last month's choices left you $${Math.abs(balance)} in debt. Another hit could spiral out of control.`;
+      }
+      return null;
+    }
+    case 3: {
+      const parts: string[] = [];
+      if (childStatus === "working") {
+        parts.push("Your child has been working for months now, bringing in wages you rely on.");
+      } else if (childStatus === "trained") {
+        parts.push("Your child is in training — no wages coming in, but the promise of something better.");
+      }
+      if (extraExpenses > 0) {
+        parts.push(`A previous loan adds $${extraExpenses}/month to your costs — and now you're losing wages too.`);
+      } else if (balance < 0) {
+        parts.push(`You enter this month already $${Math.abs(balance)} in debt.`);
+      }
+      return parts.length > 0 ? parts.join(" ") : null;
+    }
+    case 4: {
+      const parts: string[] = [];
+      if (childStatus === "working") {
+        parts.push("Your child has been working for months instead of going to school. This training program could change their future — but only if you can afford the lost wages.");
+      } else if (childStatus === "trained") {
+        parts.push("Your child has been in training, sacrificing income for a better path.");
+      }
+      if (extraExpenses > 0) {
+        parts.push(`Past debts cost you $${extraExpenses} every month — that makes every decision harder.`);
+      }
+      return parts.length > 0 ? parts.join(" ") : null;
+    }
+    case 5: {
+      const parts: string[] = [];
+      if (childStatus === "working") {
+        parts.push("Your child has been your financial lifeline through every crisis — but they're still not in school.");
+      } else if (childStatus === "trained") {
+        parts.push("Your child is nearly through their training. Losing them to this catastrophe would undo everything.");
+      }
+      if (balance < 0) {
+        parts.push(`You were already $${Math.abs(balance)} in debt before this disaster struck.`);
+      }
+      return parts.length > 0 ? parts.join(" ") : null;
+    }
+    case 6: {
+      if (childStatus === "school") {
+        return "Against all odds, your child stayed in school through every crisis. The years of sacrifice are about to reveal whether they were worth it.";
+      }
+      if (childStatus === "working") {
+        return "Your child spent their entire childhood laboring to keep your family afloat. They never finished school. That decision now defines what comes next.";
+      }
+      if (childStatus === "trained") {
+        return "Your child completed their vocational training. A decision made years ago — pulling them from work and into a program — is about to determine your family's future.";
+      }
+      return null;
+    }
+    default:
+      return null;
+  }
+}
 
 /** Returns visible options for an event given the player's current child status */
 export function getVisibleOptions(

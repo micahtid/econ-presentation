@@ -9,6 +9,7 @@ import {
   EVENTS,
   SCENARIOS,
   getVisibleOptions,
+  getContextNote,
   type ChildStatus,
   type OptionKey,
 } from "@/lib/gameConstants";
@@ -56,6 +57,7 @@ export default function EventScreen({
   const event = EVENTS[eventNumber - 1];
   const scenarioData = SCENARIOS[scenario - 1];
   const visibleOptions = event ? getVisibleOptions(event, childStatus) : [];
+  const contextNote = getContextNote(eventNumber, childStatus, balance, monthlyExpenses, scenario);
 
   const handleChoice = async (optionKey: OptionKey) => {
     if (hasSubmittedRef.current || submitting) return;
@@ -183,6 +185,14 @@ export default function EventScreen({
           <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#111111", lineHeight: 1.25, marginBottom: "10px" }}>
             {event.title}
           </h2>
+
+          {contextNote && (
+            <div style={{ background: "#f8f8f8", borderLeft: "3px solid #cccccc", borderRadius: "4px", padding: "10px 14px", marginBottom: "12px" }}>
+              <p style={{ fontSize: "13px", color: "#666666", lineHeight: "1.55", margin: 0, fontStyle: "italic" }}>
+                {contextNote}
+              </p>
+            </div>
+          )}
 
           {event.autoPenalty !== null && (
             <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "#fef2f2", color: "#b91c1c", fontSize: "13px", fontWeight: 600, padding: "6px 12px", borderRadius: "999px", border: "1px solid #fecaca", marginBottom: "10px" }}>

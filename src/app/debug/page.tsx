@@ -5,6 +5,8 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import EventScreen from "@/components/game/EventScreen";
 import MonthEndScreen from "@/components/game/MonthEndScreen";
 import WaitingScreen from "@/components/game/WaitingScreen";
+import GameIntroScreen from "@/components/game/GameIntroScreen";
+import LeaderboardScreen from "@/components/game/LeaderboardScreen";
 import ResultsScreen from "@/components/game/ResultsScreen";
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
@@ -12,17 +14,19 @@ import ResultsScreen from "@/components/game/ResultsScreen";
 const MOCK_RESULTS = {
   totalPlayers: 24,
   finishedCount: 24,
-  childLaborCount: 15,
-  negativeNoLabor: 6,
+  childLaborCount: 15, // chose child labor at least once
+  noLaborCount: 9,     // never used child labor
+  noLaborInDebt: 6,    // never used child labor AND in debt
+  inDebtCount: 14,     // all players in debt
   playerList: [
     { username: "Alice", childStatus: "working", balance: 25, scenario: 2 },
     { username: "Marco", childStatus: "working", balance: 15, scenario: 3 },
-    { username: "Priya", childStatus: "trained", balance: -20, scenario: 4 },
-    { username: "Chen", childStatus: "school", balance: -35, scenario: 1 },
     { username: "Fatima", childStatus: "working", balance: 10, scenario: 5 },
-    { username: "David", childStatus: "school", balance: -55, scenario: 1 },
-    { username: "Yuki", childStatus: "trained", balance: -40, scenario: 2 },
     { username: "Lena", childStatus: "working", balance: 0, scenario: 3 },
+    { username: "Priya", childStatus: "trained", balance: -20, scenario: 4 },
+    { username: "Yuki", childStatus: "trained", balance: -40, scenario: 2 },
+    { username: "Chen", childStatus: "school", balance: -35, scenario: 1 },
+    { username: "David", childStatus: "school", balance: -55, scenario: 1 },
   ],
 };
 
@@ -197,6 +201,27 @@ function MockHostMonitor() {
   );
 }
 
+function MockGoalScreen() {
+  return (
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-6">
+      <div className="w-full max-w-sm text-center">
+        <p style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#aaaaaa", marginBottom: "16px" }}>
+          Your Goal
+        </p>
+        <h2 style={{ fontSize: "36px", fontWeight: 700, color: "#111111", lineHeight: 1.2, marginBottom: "16px" }}>
+          Stay Out of Debt
+        </h2>
+        <p style={{ fontSize: "15px", color: "#666666", lineHeight: "1.65", marginBottom: "32px" }}>
+          You will face six crises. Every decision affects your balance, income, and expenses — and some choices cannot be undone.
+        </p>
+        <p style={{ textAlign: "center", color: "#bbbbbb", fontSize: "13px" }}>
+          Starting in <span style={{ fontWeight: 700, color: "#888888" }}>5s</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ─── Frame definitions ────────────────────────────────────────────────────────
 
 type Frame = {
@@ -229,6 +254,23 @@ const FRAMES: Frame[] = [
     tag: "Wait",
     render: () => (
       <WaitingScreen message="Waiting for the host to begin" subMessage="Joined as TestPlayer" />
+    ),
+  },
+  // ── Game intro ────────────────────────────────────────────────────
+  {
+    title: "Intro: Scenario",
+    tag: "Intro",
+    render: () => (
+      <GameIntroScreen scenarioId={1} onDone={() => {}} scenarioDuration={99} goalDuration={99} />
+    ),
+  },
+  {
+    title: "Intro: Goal",
+    tag: "Intro",
+    render: () => (
+      // Hack: render with a scenarioId that won't be shown — we fake the goal phase
+      // by using a wrapper that skips directly to goal
+      <MockGoalScreen />
     ),
   },
   // ── Host monitors game ────────────────────────────────────────────
@@ -439,6 +481,18 @@ const FRAMES: Frame[] = [
     tag: "Wait",
     render: () => (
       <WaitingScreen message="You're done!" subMessage="Waiting for everyone else to finish…" />
+    ),
+  },
+  {
+    title: "Leaderboard",
+    tag: "LB",
+    render: () => <LeaderboardScreen results={MOCK_RESULTS} />,
+  },
+  {
+    title: "Host Leaderboard",
+    tag: "Host",
+    render: () => (
+      <LeaderboardScreen results={MOCK_RESULTS} isHost onRevealStats={() => {}} />
     ),
   },
   {

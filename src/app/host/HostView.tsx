@@ -7,6 +7,7 @@ import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import Lobby from "@/components/host/Lobby";
 import GameMonitor from "@/components/host/GameMonitor";
+import LeaderboardScreen from "@/components/game/LeaderboardScreen";
 import ResultsScreen from "@/components/game/ResultsScreen";
 
 export default function HostView() {
@@ -16,6 +17,7 @@ export default function HostView() {
 
   const [creating, setCreating] = useState(false);
   const createRoom = useMutation(api.rooms.createRoom);
+  const revealStats = useMutation(api.rooms.revealStats);
 
   const room = useQuery(api.rooms.getRoom, code ? { code } : "skip");
 
@@ -103,8 +105,14 @@ export default function HostView() {
           </p>
         </div>
 
-        {room.revealResults && results ? (
+        {room.revealStats && results ? (
           <ResultsScreen results={results} isHost />
+        ) : room.revealResults && results ? (
+          <LeaderboardScreen
+            results={results}
+            isHost
+            onRevealStats={() => revealStats({ roomId: room._id as Id<"rooms"> })}
+          />
         ) : room.status === "waiting" ? (
           <Lobby
             roomId={room._id}

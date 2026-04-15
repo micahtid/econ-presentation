@@ -121,6 +121,13 @@ export const revealResults = mutation({
   },
 });
 
+export const revealStats = mutation({
+  args: { roomId: v.id("rooms") },
+  handler: async (ctx, { roomId }) => {
+    await ctx.db.patch(roomId, { revealStats: true });
+  },
+});
+
 export const getRoom = query({
   args: { code: v.string() },
   handler: async (ctx, { code }) => {
@@ -158,12 +165,16 @@ export const getRoomResults = query({
 
     const finished = players.filter((p) => p.isFinished);
     const totalPlayers = players.length;
-    const childLaborCount = finished.filter(
-      (p) => p.childStatus === "working"
-    ).length;
-    const negativeNoLabor = finished.filter(
-      (p) => p.childStatus === "school" && p.balance < 0
-    ).length;
+
+    // Stat 1: chose child labor at least once (tracked via usedChildLabor flag)
+    const childLaborCount = finished.filter((p) => p.usedChildLabor === true).length;
+
+    // Stat 2: of those who never used child labor, how many ended in debt
+    const noLaborCount = finished.filter((p) => !p.usedChildLabor).length;
+    const noLaborInDebt = finished.filter((p) => !p.usedChildLabor && p.balance < 0).length;
+
+    // Stat 3: all players who ended in debt
+    const inDebtCount = finished.filter((p) => p.balance < 0).length;
 
     const playerList = finished
       .map((p) => ({
@@ -178,7 +189,9 @@ export const getRoomResults = query({
       totalPlayers,
       finishedCount: finished.length,
       childLaborCount,
-      negativeNoLabor,
+      noLaborCount,
+      noLaborInDebt,
+      inDebtCount,
       playerList,
     };
   },

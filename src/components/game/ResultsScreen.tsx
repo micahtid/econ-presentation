@@ -10,8 +10,14 @@ interface PlayerResult {
 interface ResultsData {
   totalPlayers: number;
   finishedCount: number;
+  /** Players who chose child labor at least once */
   childLaborCount: number;
-  negativeNoLabor: number;
+  /** Players who never used child labor */
+  noLaborCount: number;
+  /** Players who never used child labor AND ended in debt */
+  noLaborInDebt: number;
+  /** All players who ended in debt */
+  inDebtCount: number;
   playerList: PlayerResult[];
 }
 
@@ -21,26 +27,32 @@ interface Props {
 }
 
 export default function ResultsScreen({ results, isHost = false }: Props) {
-  const { totalPlayers, finishedCount, childLaborCount, negativeNoLabor } = results;
+  const { finishedCount, childLaborCount, noLaborCount, noLaborInDebt, inDebtCount } = results;
 
+  // Stat 1: % who chose child labor at least once
   const pctChildLabor =
     finishedCount > 0 ? Math.round((childLaborCount / finishedCount) * 100) : 0;
 
-  const pctNegativeNoLabor =
-    finishedCount > 0 ? Math.round((negativeNoLabor / finishedCount) * 100) : 0;
+  // Stat 2: % of non-child-labor players who still ended in debt
+  const pctNoLaborInDebt =
+    noLaborCount > 0 ? Math.round((noLaborInDebt / noLaborCount) * 100) : 0;
+
+  // Stat 3: % of all players who ended in debt
+  const pctInDebt =
+    finishedCount > 0 ? Math.round((inDebtCount / finishedCount) * 100) : 0;
 
   const stats = [
     {
       pct: pctChildLabor,
-      label: "chose child labor to survive",
+      label: "of players chose child labor at least once",
     },
     {
-      pct: pctNegativeNoLabor,
-      label: "avoided child labor but ended in debt",
+      pct: pctNoLaborInDebt,
+      label: "who avoided child labor still ended in debt",
     },
     {
-      pct: pctChildLabor + pctNegativeNoLabor,
-      label: "of families couldn't escape poverty's trap",
+      pct: pctInDebt,
+      label: "of all families ended in debt",
     },
   ];
 
@@ -56,22 +68,19 @@ export default function ResultsScreen({ results, isHost = false }: Props) {
           Simulation Results
         </h2>
         <p style={{ textAlign: "center", color: "#888888", fontSize: "14px", marginBottom: "56px" }}>
-          {finishedCount} of {totalPlayers} players completed the simulation
+          {results.finishedCount} of {results.totalPlayers} players completed the simulation
         </p>
 
-        {/* Stat bars — column, centered */}
+        {/* Stat bars */}
         <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
           {stats.map(({ pct, label }) => (
             <div key={label} style={{ textAlign: "center" }}>
-              {/* Percentage */}
               <p style={{ fontSize: "40px", fontWeight: 700, color: "#111111", lineHeight: 1, margin: "0 0 6px 0" }}>
                 {pct}%
               </p>
-              {/* Label */}
               <p style={{ fontSize: "14px", color: "#888888", margin: "0 0 14px 0", lineHeight: 1.4 }}>
                 {label}
               </p>
-              {/* Bar track */}
               <div style={{ height: "8px", background: "#f0f0f0", borderRadius: "999px", overflow: "hidden" }}>
                 <div
                   style={{

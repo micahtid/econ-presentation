@@ -10,6 +10,7 @@ export default defineSchema({
       v.literal("finished")
     ),
     revealResults: v.boolean(),
+    revealStats: v.optional(v.boolean()),
   }).index("by_code", ["code"]),
 
   players: defineTable({
@@ -24,6 +25,8 @@ export default defineSchema({
       v.literal("working"),
       v.literal("trained")
     ),
+    /** True once the player has ever chosen an option that sends the child to work */
+    usedChildLabor: v.optional(v.boolean()),
     isFinished: v.boolean(),
     currentEvent: v.number(),
     phase: v.union(

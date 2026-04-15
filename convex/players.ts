@@ -43,6 +43,10 @@ export const submitChoice = mutation({
     const newStatus =
       option.statusChange ?? (player.childStatus as ChildStatus);
 
+    // Sticky: once true, always true — even if child later transitions to "trained"
+    const usedChildLabor =
+      option.statusChange === "working" || (player.usedChildLabor ?? false);
+
     const prevBalance = player.balance;
     const nextEvent = eventNumber + 1;
     const isLastEvent = eventNumber === 6;
@@ -53,6 +57,7 @@ export const submitChoice = mutation({
         monthlyIncome: newIncome,
         monthlyExpenses: newExpenses,
         childStatus: newStatus,
+        usedChildLabor,
         isFinished: true,
         phase: "finished",
         currentEvent: nextEvent,
@@ -68,6 +73,7 @@ export const submitChoice = mutation({
         monthlyIncome: newIncome,
         monthlyExpenses: newExpenses,
         childStatus: newStatus,
+        usedChildLabor,
         phase: "month_end",
         currentEvent: nextEvent,
         prevBalance,
