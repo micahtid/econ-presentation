@@ -7,7 +7,7 @@ interface Props {
   scenarioId: number;
   /** Called when the full intro sequence completes */
   onDone: () => void;
-  /** Debug: durations in seconds. Defaults: scenario=10, goal=5 */
+  /** Debug: durations in seconds. Defaults: scenario=15, goal=10 */
   scenarioDuration?: number;
   goalDuration?: number;
 }
@@ -17,8 +17,8 @@ type Phase = "scenario" | "goal";
 export default function GameIntroScreen({
   scenarioId,
   onDone,
-  scenarioDuration = 10,
-  goalDuration = 5,
+  scenarioDuration = 15,
+  goalDuration = 10,
 }: Props) {
   const scenario = SCENARIOS[scenarioId - 1];
   const [phase, setPhase] = useState<Phase>("scenario");
@@ -75,15 +75,17 @@ export default function GameIntroScreen({
             {scenario.description}
           </p>
 
-          {/* Income / Expenses */}
+          {/* Income / Expenses — labels split into two lines for visual symmetry */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "32px" }}>
             {[
-              { label: "Monthly Income", value: `$${scenario.income}` },
-              { label: "Monthly Expenses", value: `$${scenario.expenses}` },
-            ].map(({ label, value }) => (
-              <div key={label} style={{ border: "1px solid #eeeeee", borderRadius: "12px", padding: "14px", textAlign: "center" }}>
+              { line1: "Monthly", line2: "Income", value: `$${scenario.income}` },
+              { line1: "Monthly", line2: "Expenses", value: `$${scenario.expenses}` },
+            ].map(({ line1, line2, value }) => (
+              <div key={line2} style={{ border: "1px solid #eeeeee", borderRadius: "12px", padding: "14px", textAlign: "center" }}>
                 <p style={{ fontSize: "22px", fontWeight: 700, color: "#111111", margin: "0 0 4px 0" }}>{value}</p>
-                <p style={{ fontSize: "11px", fontWeight: 500, color: "#bbbbbb", textTransform: "uppercase", letterSpacing: "0.06em", margin: 0 }}>{label}</p>
+                <p style={{ fontSize: "11px", fontWeight: 500, color: "#bbbbbb", textTransform: "uppercase", letterSpacing: "0.06em", margin: 0, lineHeight: 1.4 }}>
+                  {line1}<br />{line2}
+                </p>
               </div>
             ))}
           </div>
@@ -107,7 +109,7 @@ export default function GameIntroScreen({
           Stay Out of Debt
         </h2>
         <p style={{ fontSize: "15px", color: "#666666", lineHeight: "1.65", marginBottom: "32px" }}>
-          You will face six crises. Every decision affects your balance, income, and expenses — and some choices cannot be undone.
+          You will face six crises. Every decision affects your balance, income, and expenses. Some choices cannot be undone.
         </p>
         <p style={{ textAlign: "center", color: "#bbbbbb", fontSize: "13px" }}>
           Starting in <span style={{ fontWeight: 700, color: "#888888" }}>{secondsLeft}s</span>

@@ -131,7 +131,7 @@ export default function LeaderboardScreen({
               letterSpacing: "0.01em",
             }}
           >
-            Show Class Statistics →
+            Show Class Statistics
           </button>
         )}
 

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
-import { LuTriangleAlert } from "react-icons/lu";
 import {
   EVENTS,
   SCENARIOS,
@@ -28,7 +27,7 @@ interface Props {
   noAutoSubmit?: boolean;
 }
 
-const TIMER_SECONDS = 30;
+const TIMER_SECONDS = 35;
 
 const CHILD_STATUS_LABEL: Record<ChildStatus, string> = {
   school: "In School",
@@ -182,33 +181,24 @@ export default function EventScreen({
             </span>
           </div>
 
-          <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#111111", lineHeight: 1.25, marginBottom: "10px" }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#111111", lineHeight: 1.25, marginBottom: contextNote ? "8px" : "12px" }}>
             {event.title}
           </h2>
 
           {contextNote && (
-            <div style={{ background: "#f8f8f8", borderLeft: "3px solid #cccccc", borderRadius: "4px", padding: "10px 14px", marginBottom: "12px" }}>
-              <p style={{ fontSize: "13px", color: "#666666", lineHeight: "1.55", margin: 0, fontStyle: "italic" }}>
-                {contextNote}
-              </p>
-            </div>
+            <p style={{ fontSize: "13px", color: "#999999", lineHeight: "1.55", margin: "0 0 12px 0", fontStyle: "italic" }}>
+              {contextNote}
+            </p>
           )}
 
-          {event.autoPenalty !== null && (
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "#fef2f2", color: "#b91c1c", fontSize: "13px", fontWeight: 600, padding: "6px 12px", borderRadius: "999px", border: "1px solid #fecaca", marginBottom: "10px" }}>
-              <LuTriangleAlert size={14} />
-              <span>–${Math.abs(event.autoPenalty)} lost automatically</span>
-            </div>
-          )}
-
-          <p style={{ fontSize: "15px", color: "#555555", lineHeight: "1.6", margin: 0 }}>
+          <p style={{ fontSize: "15px", color: "#444444", lineHeight: "1.6", margin: 0 }}>
             {event.description}
           </p>
         </div>
 
         {/* Options */}
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {visibleOptions.map((opt) => (
+          {visibleOptions.map((opt, i) => (
             <button
               key={opt.key}
               onClick={() => handleChoice(opt.key)}
@@ -240,7 +230,7 @@ export default function EventScreen({
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "16px", width: "100%" }}>
-                {/* Letter badge */}
+                {/* Letter badge — sequential A/B/C/D regardless of underlying option key */}
                 <span style={{
                   flexShrink: 0,
                   width: "32px",
@@ -256,7 +246,7 @@ export default function EventScreen({
                   justifyContent: "center",
                   lineHeight: 1,
                 }}>
-                  {opt.key}
+                  {String.fromCharCode(65 + i)}
                 </span>
                 <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: 0 }}>
                   <p style={{

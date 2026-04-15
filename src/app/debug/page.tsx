@@ -212,7 +212,7 @@ function MockGoalScreen() {
           Stay Out of Debt
         </h2>
         <p style={{ fontSize: "15px", color: "#666666", lineHeight: "1.65", marginBottom: "32px" }}>
-          You will face six crises. Every decision affects your balance, income, and expenses — and some choices cannot be undone.
+          You will face six crises. Every decision affects your balance, income, and expenses. Some choices cannot be undone.
         </p>
         <p style={{ textAlign: "center", color: "#bbbbbb", fontSize: "13px" }}>
           Starting in <span style={{ fontWeight: 700, color: "#888888" }}>5s</span>

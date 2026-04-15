@@ -106,7 +106,11 @@ export default function HostView() {
         </div>
 
         {room.revealStats && results ? (
-          <ResultsScreen results={results} isHost />
+          <ResultsScreen
+            results={results}
+            isHost
+            onLeave={() => router.push("/")}
+          />
         ) : room.revealResults && results ? (
           <LeaderboardScreen
             results={results}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
@@ -15,8 +15,14 @@ import type { ChildStatus } from "@/lib/gameConstants";
 
 export default function PlayPage() {
   const { roomCode } = useParams<{ roomCode: string }>();
+  const router = useRouter();
   const [playerId, setPlayerId] = useState<string | null>(null);
   const [showIntro, setShowIntro] = useState(true);
+
+  const handleLeave = () => {
+    localStorage.removeItem("playerId");
+    router.push("/");
+  };
 
   useEffect(() => {
     const stored = localStorage.getItem("playerId");
@@ -94,7 +100,7 @@ export default function PlayPage() {
 
   // Results stats revealed (after leaderboard)
   if (room?.revealStats && results) {
-    return <ResultsScreen results={results} />;
+    return <ResultsScreen results={results} onLeave={handleLeave} />;
   }
 
   // Leaderboard revealed (before stats)

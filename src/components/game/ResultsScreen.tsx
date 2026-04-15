@@ -24,9 +24,10 @@ interface ResultsData {
 interface Props {
   results: ResultsData;
   isHost?: boolean;
+  onLeave?: () => void;
 }
 
-export default function ResultsScreen({ results, isHost = false }: Props) {
+export default function ResultsScreen({ results, isHost = false, onLeave }: Props) {
   const { finishedCount, childLaborCount, noLaborCount, noLaborInDebt, inDebtCount } = results;
 
   // Stat 1: % who chose child labor at least once
@@ -97,9 +98,38 @@ export default function ResultsScreen({ results, isHost = false }: Props) {
         </div>
 
         {!isHost && (
-          <p style={{ textAlign: "center", color: "#bbbbbb", fontSize: "12px", marginTop: "40px" }}>
+          <p style={{ textAlign: "center", color: "#bbbbbb", fontSize: "12px", marginTop: "40px", marginBottom: "16px" }}>
             Thank you for participating in the simulation.
           </p>
+        )}
+
+        {onLeave && (
+          <button
+            onClick={onLeave}
+            style={{
+              width: "100%",
+              padding: "14px 24px",
+              marginTop: isHost ? "48px" : "0",
+              background: "#ffffff",
+              color: "#111111",
+              border: "1.5px solid #e5e5e5",
+              borderRadius: "12px",
+              fontSize: "15px",
+              fontWeight: 600,
+              cursor: "pointer",
+              transition: "border-color 0.15s ease, background 0.15s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "#111111";
+              (e.currentTarget as HTMLButtonElement).style.background = "#fafafa";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "#e5e5e5";
+              (e.currentTarget as HTMLButtonElement).style.background = "#ffffff";
+            }}
+          >
+            Leave Room
+          </button>
         )}
       </div>
     </div>
